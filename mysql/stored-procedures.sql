@@ -40,7 +40,7 @@ BEGIN
     SET destination_url = destination_url_var,
         set_referrer = set_referrer_var,
         client_id = client_id_var
-    WHERE shortcut = shortcut_var;
+    WHERE shortcut = shortcut_var COLLATE utf8_unicode_ci;
 
 END$$
 # End update_shortcut
@@ -79,7 +79,7 @@ CREATE PROCEDURE get_shortcut(
     shortcut_var VARCHAR(32)
 )
 BEGIN
-    SELECT * FROM `short_url` WHERE shortcut = shortcut_var;
+    SELECT * FROM `short_url` WHERE shortcut = shortcut_var COLLATE utf8_unicode_ci;
 END$$
 # End get_shortcut
 
@@ -89,7 +89,9 @@ CREATE PROCEDURE get_shortcut_tracking(
     shortcut_var VARCHAR(32)
 )
 BEGIN
-    SELECT * FROM `short_url_tracking` WHERE shortcut = shortcut_var ORDER BY id ASC;
+    SELECT * FROM `short_url_tracking`
+        LEFT JOIN `short_url` USING(shortcut_id)
+    WHERE shortcut = shortcut_var ORDER BY id ASC;
 END$$
 # End get_shortcut_tracking
 
