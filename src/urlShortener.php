@@ -59,7 +59,7 @@ class urlShortener
         $result = null;
         try {
             $query = $this->db_conn->prepare('CALL add_shortcut(?,?,?,?, @last_id)');
-            $query->execute(array(
+            $result = $query->execute(array(
                 $shortcut,
                 $destination,
                 $set_referrer,
