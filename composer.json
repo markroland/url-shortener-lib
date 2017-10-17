@@ -24,6 +24,7 @@
     },
     "autoload": {
         "psr-4": {
+            "markroland\\UrlShortener\\Tests\\": "tests/",
             "markroland\\": "src/"
         }
     }
